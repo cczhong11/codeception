@@ -14,6 +14,7 @@ An app help you know other associates photo based on GPS.
 
 - using undertow and CosmosDB to deploy backend service
 - install maven and use 'mvn package' to compile code 
+- run 'sudo java -cp target/backend.jar com.walmart.app.backend.MiniSite' to start server
 
 
 ### upload

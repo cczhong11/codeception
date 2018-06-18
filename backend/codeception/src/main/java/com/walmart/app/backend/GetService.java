@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -19,6 +21,7 @@ import com.microsoft.azure.documentdb.DocumentClientException;
 import com.microsoft.azure.documentdb.DocumentCollection;
 import com.microsoft.azure.documentdb.RequestOptions;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xnio.IoUtils;
 
@@ -62,7 +65,25 @@ public class GetService extends HttpServlet {
     return new Record(x,y, "", instant.toString(), "");
   }
   private JSONObject getResult(Record r){
-    return null;
+    JSONObject obj = new JSONObject();
+       List<Document> documentList = client
+      .queryDocuments(collectionLink,
+              "SELECT * FROM root r WHERE r.x < 124", null)
+      .getQueryIterable().toList();
+
+if (documentList.size() > 0) {
+  JSONArray arr = new JSONArray();
+  List<JSONObject> l = new ArrayList<JSONObject>();
+  for(int i = 0;i<documentList.size();i++){
+    JSONObject object = new JSONObject(documentList.get(i).toJson());
+    l.add(obj);
+  }
+  obj.put("data", l);
+} else {
+  System.out.println("nothing");
+
+  }
+  return obj;
   }
   }
 

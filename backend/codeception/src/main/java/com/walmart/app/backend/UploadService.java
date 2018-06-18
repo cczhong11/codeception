@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Instant;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -29,6 +30,7 @@ public class UploadService extends HttpServlet {
   private static Gson gson = new Gson();
   private static String collectionLink = "";
   public UploadService() {
+    
     client = new DocumentClient(AccountCredentials.HOST,AccountCredentials.MASTER_KEY,null,null);
     RequestOptions options = new RequestOptions();
     options.setOfferThroughput(400);
@@ -42,13 +44,19 @@ public class UploadService extends HttpServlet {
       throws ServletException, IOException {
     // TODO: read from post data
     //
+
     Record r = retrievePostData(request.getReader());
     insertData(client,r);
     PrintWriter writer = response.getWriter();
     writer.write("success");
     writer.close();
   }
-
+  /**
+   *
+   * args: request.getreader
+   *  this function will change data to record 
+   */
+   
   private Record retrievePostData(BufferedReader r){
     String data = r.lines().collect(Collectors.joining(System.lineSeparator()));
     JSONObject obj = new JSONObject(data);

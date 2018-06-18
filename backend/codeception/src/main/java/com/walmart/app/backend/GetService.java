@@ -45,12 +45,24 @@ public class GetService extends HttpServlet {
                         final HttpServletResponse response)
       throws ServletException, IOException {
     // TODO:
-    
-    
+    Record r = retrievePostData(request.getReader());
+      JSONObject obj = getResult(r);
+    response.setContentType("application/json;charset=UTF-8");
     PrintWriter writer = response.getWriter();
     writer.write("success");
     writer.close();
   }
-
+  private Record retrievePostData(BufferedReader r){
+    String data = r.lines().collect(Collectors.joining(System.lineSeparator()));
+    JSONObject obj = new JSONObject(data);
+    Instant instant = Instant.now();
+    float x = obj.getFloat("x");
+    float y = obj.getFloat("y");
+   
+    return new Record(x,y, "", instant.toString(), "");
+  }
+  private JSONObject getResult(Record r){
+    return null;
+  }
   }
 

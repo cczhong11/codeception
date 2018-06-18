@@ -32,12 +32,12 @@ public final class AccountCredentials {
     // Replace MASTER_KEY and HOST with values from your DocumentDB account.
     // The default values are credentials of the local emulator, which are not used in any production environment.
     // <!--[SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine")]-->
-    public static String MASTER_KEY = System.getenv().get("CODEACCOUNT_KEY");
+    public static String MASTER_KEY = System.getenv("CODEKEY");
                     
     public static  String databaseId = "db";
     
     public static  String collectionId = "codeception";
-    public static String HOST = System.getenv().get("CODEHOST");
+    public static String HOST = "https://codeception.documents.azure.com:443/";
             
     }
 

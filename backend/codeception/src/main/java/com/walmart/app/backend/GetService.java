@@ -31,59 +31,58 @@ public class GetService extends HttpServlet {
    *
    */
   private DocumentClient client;
-  
+
   private static Gson gson = new Gson();
   private static String collectionLink = "";
+
   public GetService() {
-    
-    client = new DocumentClient(AccountCredentials.HOST,AccountCredentials.MASTER_KEY,null,null);
+
+    client = new DocumentClient(AccountCredentials.HOST, AccountCredentials.MASTER_KEY, null, null);
     RequestOptions options = new RequestOptions();
     options.setOfferThroughput(400);
     collectionLink = String.format("/dbs/%s/colls/%s", AccountCredentials.databaseId, AccountCredentials.collectionId);
-        
+
   }
 
   @Override
-  protected void doPost(final HttpServletRequest request,
-                        final HttpServletResponse response)
+  protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
       throws ServletException, IOException {
     // TODO:
     Record r = retrievePostData(request.getReader());
-      JSONObject obj = getResult(r);
+    JSONObject obj = getResult(r);
     response.setContentType("application/json;charset=UTF-8");
     PrintWriter writer = response.getWriter();
     writer.write("success");
     writer.close();
   }
-  private Record retrievePostData(BufferedReader r){
+
+  private Record retrievePostData(BufferedReader r) {
     String data = r.lines().collect(Collectors.joining(System.lineSeparator()));
     JSONObject obj = new JSONObject(data);
     Instant instant = Instant.now();
     float x = obj.getFloat("x");
     float y = obj.getFloat("y");
-   
-    return new Record(x,y, "", instant.toString(), "");
+
+    return new Record(x, y, "", instant.toString(), "");
   }
-  private JSONObject getResult(Record r){
+
+  private JSONObject getResult(Record r) {
     JSONObject obj = new JSONObject();
-       List<Document> documentList = client
-      .queryDocuments(collectionLink,
-              "SELECT * FROM root r WHERE r.x < 124", null)
-      .getQueryIterable().toList();
+    List<Document> documentList = client.queryDocuments(collectionLink, "SELECT * FROM root r WHERE r.x < 124", null)
+        .getQueryIterable().toList();
 
-if (documentList.size() > 0) {
-  JSONArray arr = new JSONArray();
-  List<JSONObject> l = new ArrayList<JSONObject>();
-  for(int i = 0;i<documentList.size();i++){
-    JSONObject object = new JSONObject(documentList.get(i).toJson());
-    l.add(obj);
-  }
-  obj.put("data", l);
-} else {
-  System.out.println("nothing");
+    if (documentList.size() > 0) {
+      JSONArray arr = new JSONArray();
+      List<JSONObject> l = new ArrayList<JSONObject>();
+      for (int i = 0; i < documentList.size(); i++) {
+        JSONObject object = new JSONObject(documentList.get(i).toJson());
+        l.add(obj);
+      }
+      obj.put("data", l);
+    } else {
+      System.out.println("nothing");
 
+    }
+    return obj;
   }
-  return obj;
-  }
-  }
-
+}

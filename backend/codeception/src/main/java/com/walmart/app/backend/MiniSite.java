@@ -14,9 +14,7 @@ import static io.undertow.servlet.Servlets.deployment;
 import static io.undertow.servlet.Servlets.servlet;
 import io.undertow.Handlers;
 
-/*
-        You don't have to modify this file to finish task 1~5.
-*/
+
 public class MiniSite {
   public MiniSite() throws Exception {}
 

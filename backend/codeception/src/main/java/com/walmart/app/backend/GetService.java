@@ -3,6 +3,8 @@ package com.walmart.app.backend;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Instant;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +20,7 @@ import com.microsoft.azure.documentdb.DocumentCollection;
 import com.microsoft.azure.documentdb.RequestOptions;
 
 import org.json.JSONObject;
+import org.xnio.IoUtils;
 
 public class GetService extends HttpServlet {
 
@@ -43,18 +46,11 @@ public class GetService extends HttpServlet {
       throws ServletException, IOException {
     // TODO:
     
-    Record r = retrievePostData(request.getReader());
-    insertData(client,r);
+    
     PrintWriter writer = response.getWriter();
     writer.write("success");
     writer.close();
   }
-  private Record retrievePostData(BufferedReader r){
-    return null;
-  }
-  
-  private void insertData(DocumentClient client, Record r){
-    Document newRecord = new Document(gson.toJson(r));
 
   }
-}
+

@@ -1,11 +1,11 @@
 package com.walmart.app.backend;
 public class Record{
-    public int x;
-    public int y;
+    public float x;
+    public float y;
     public String username;
     public String time;
     public String filelink;
-    public Record(int x,int y, String username, String time, String filelink){
+    public Record(float x,float y, String username, String time, String filelink){
         this.x = x;
         this.y = y;
         this.username = username;

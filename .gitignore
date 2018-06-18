@@ -1,9 +1,9 @@
 # Compiled class file
 *.class
-
+*.prefs
 # Log file
 *.log
-
+/.settings/
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

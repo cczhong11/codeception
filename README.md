@@ -5,10 +5,10 @@ An app help you know other associates photo based on GPS.
 ## API
 
 1. /upload
-{x:xx,y:yy,user:name,file:filelink}
+{x:xx,y:yy,user:name,file:filelink, **time:time**}
 
 2. /get
-{data:[{x:xx,y:yy,file:filelink},{x:xx,y:yy,file:filelink}....]}
+{data:[{x:xx,y:yy,file:filelink,**time:time**},{x:xx,y:yy,file:filelink,**time:time**}....]}
 
 ## Backend 
 

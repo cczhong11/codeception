@@ -21,7 +21,12 @@ public class GetService extends HttpServlet {
   protected void doPost(final HttpServletRequest request,
                         final HttpServletResponse response)
       throws ServletException, IOException {
-    // TODO:
+    /* TODO:
+    1. read data from request and save data to a record class
+    2. get data from cosmosdb
+        1. connect cosmosdb with java sdk
+        2. retrieve data with SQL from Li
+    */
     PrintWriter writer = response.getWriter();
     writer.write("hello world");
     writer.close();

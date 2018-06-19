@@ -48,10 +48,19 @@ public class GetService extends HttpServlet {
   @Override
   protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
       throws ServletException, IOException {
+<<<<<<< HEAD
     // TODO:
     Record r = retrievePostData(request.getReader());
     JSONObject obj = getResult(r);
     response.setContentType("application/json;charset=UTF-8");
+=======
+    /* TODO:
+    1. read data from request and save data to a record class
+    2. get data from cosmosdb
+        1. connect cosmosdb with java sdk
+        2. retrieve data with SQL from Li
+    */
+>>>>>>> origin
     PrintWriter writer = response.getWriter();
     writer.write(obj.toString());
     writer.close();

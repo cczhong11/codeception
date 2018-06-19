@@ -21,7 +21,12 @@ public class UploadService extends HttpServlet {
   protected void doPost(final HttpServletRequest request,
                         final HttpServletResponse response)
       throws ServletException, IOException {
-    // TODO:
+    /* TODO:
+    1. read data from request and save data to a record class
+    2. insert data to cosmosdb
+        1. connect cosmosdb with java sdk
+        2. insert data in a document
+    */
     PrintWriter writer = response.getWriter();
     writer.write("hello world");
     writer.close();

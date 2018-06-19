@@ -52,7 +52,7 @@ public class GetService extends HttpServlet {
     JSONObject obj = getResult(r);
     response.setContentType("application/json;charset=UTF-8");
     PrintWriter writer = response.getWriter();
-    writer.write("success");
+    writer.write(obj.toString());
     writer.close();
   }
 
@@ -76,7 +76,7 @@ public class GetService extends HttpServlet {
       List<JSONObject> l = new ArrayList<JSONObject>();
       for (int i = 0; i < documentList.size(); i++) {
         JSONObject object = new JSONObject(documentList.get(i).toJson());
-        l.add(obj);
+        l.add(object);
       }
       obj.put("data", l);
     } else {

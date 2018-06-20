@@ -1,62 +1,65 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
+    <ion-navbar>
+        <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Moments
-    </ion-title>
-  </ion-navbar>
+        <ion-title>
+            Moments
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content padding id="page2">
-  <ion-list id="moments-list2">
-    <ion-item color="none" id="moments-list-item14">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="moments-list-item15">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="moments-list-item16">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="moments-list-item17">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="moments-list-item18">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="moments-list-item19">
-      <ion-thumbnail item-left>
-        <img />
-      </ion-thumbnail>
-      <h2>
-        Item
-      </h2>
-    </ion-item>
-  </ion-list>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-list id="moments-list2">
+        <ion-item color="none" id="moments-list-item14">
+            <ion-thumbnail item-left>
+                <img />
+            </ion-thumbnail>
+            <h2>
+                Item
+            </h2>
+        </ion-item>
+        <ion-item color="none" id="moments-list-item15">
+            <ion-thumbnail item-left>
+                <img />
+            </ion-thumbnail>
+            <h2>
+                Item
+            </h2>
+        </ion-item>
+        <ion-item color="none" id="moments-list-item16">
+            <ion-thumbnail item-left>
+                <img />
+            </ion-thumbnail>
+            <h2>
+                Item
+            </h2>
+        </ion-item>
+        <ion-item color="none" id="moments-list-item17">
+            <ion-thumbnail item-left>
+                <img />
+            </ion-thumbnail>
+            <h2>
+                Item
+            </h2>
+        </ion-item>
+        <ion-item color="none" id="moments-list-item18">
+            <ion-thumbnail item-left>
+                <img />
+            </ion-thumbnail>
+            <h2>
+                Item
+            </h2>
+        </ion-item>
+        <ion-item color="none" id="moments-list-item19">
+            <ion-thumbnail item-left>
+                <img />
+            </ion-thumbnail>
+            <h2>
+                Item
+            </h2>
+        </ion-item>
+    </ion-list>
 </ion-content>

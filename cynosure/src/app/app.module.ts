@@ -11,6 +11,9 @@ import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { Camera } from '@ionic-native/camera';
 import { BlobModule } from 'angular-azure-blob-service';
+import { HttpModule } from '@angular/http';
+import { HTTP } from '@ionic-native/http';
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -29,6 +32,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     BlobModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
@@ -47,6 +51,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     Camera,
+    Geolocation,
+    HTTP,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

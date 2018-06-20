@@ -29,6 +29,7 @@ public class UploadService extends HttpServlet {
   private static DocumentClient client;
   private static Gson gson = new Gson();
   private static String collectionLink = "";
+  
   public UploadService() {
     
     client = new DocumentClient(AccountCredentials.HOST,AccountCredentials.MASTER_KEY,null,null);

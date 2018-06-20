@@ -9,6 +9,7 @@ An app help you know other associates photo based on GPS.
 
 2. /get
 {data:[{x:xx,y:yy,file:filelink,**time:time**},{x:xx,y:yy,file:filelink,**time:time**}....]}
+3. uploadImage
 
 ## Backend 
 

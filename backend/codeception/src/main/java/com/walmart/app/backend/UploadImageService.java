@@ -59,9 +59,9 @@ public class UploadImageService extends HttpServlet {
         String filelink = retrievePostData(request.getReader());
 
         PrintWriter writer = response.getWriter();
+        //System.out.println(filelink);
         writer.write(filelink);
         writer.close();
-
     }
 
     /**
@@ -72,8 +72,10 @@ public class UploadImageService extends HttpServlet {
     private String retrievePostData(BufferedReader r) {
         String data = r.lines().collect(Collectors.joining(System.lineSeparator()));
         String sha256hex = DigestUtils.sha256Hex(data);
+        String filename;
         try {
             File sourceFile = File.createTempFile(sha256hex, ".jpeg");
+            filename = sourceFile.getName();
             Writer output = new BufferedWriter(new FileWriter(sourceFile));
             output.write(data);
             output.close();
@@ -89,7 +91,7 @@ public class UploadImageService extends HttpServlet {
             e.printStackTrace();
             return "null";
         }
-        return sha256hex;
+        return filename;
     }
 
 }

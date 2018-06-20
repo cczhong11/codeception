@@ -10,6 +10,7 @@ import { CameraPage } from '../pages/camera/camera';
 import { SignupPage } from '../pages/signup/signup';
 import { LoginPage } from '../pages/login/login';
 import { Camera } from '@ionic-native/camera';
+import { BlobModule } from 'angular-azure-blob-service';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -28,6 +29,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    BlobModule.forRoot(),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],

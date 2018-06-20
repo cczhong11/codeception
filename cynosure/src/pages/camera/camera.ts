@@ -1,41 +1,23 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-camera',
   templateUrl: 'camera.html'
 })
-export class CameraPage {
-  public photos: any;
-  public base64Image: string;
   
-  constructor(public navCtrl: NavController, private camera: Camera) {
+export class CameraPage {
+
+  constructor(public navCtrl: NavController, public events: Events) {
   }
   goToPicture(params) {
-
-    //define cam options
-    const options: CameraOptions = {
-      quality: 50, // picture quality
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    
     if (!params) params = {};
-    console.log("Picture Time!");
-    this.camera.getPicture(options).then((imageData) => {
-      this.base64Image = "data:image/jpeg;base64," + imageData;
-      this.photos.push(this.base64Image);
-      this.photos.reverse();
-    }, (err) => {
-      console.log(err);
-    });
-    
+    console.log("Photo Time!");
+    this.events.publish('user:login');
   } goToVideo(params) {
     if (!params) params = {};
     console.log("Video Time!");
-  } 
-  
-  
+  }
+
 }

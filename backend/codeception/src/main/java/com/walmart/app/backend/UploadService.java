@@ -63,8 +63,16 @@ public class UploadService extends HttpServlet {
     float x = obj.getFloat("x");
     float y = obj.getFloat("y");
     String filelink = obj.getString("filelink");
+    String filelink2 = obj.getString("tfilelink");
     String username = obj.getString("username");
-    return new Record(x,y, username, instant.toString(), filelink);
+    Record newRecord;
+    try{
+      String description = obj.getString("description");
+      newRecord = new Record(x,y, username, instant.toString(), filelink,filelink2,description);
+    }catch(Exception e){
+      newRecord=new Record(x,y, username, instant.toString(), filelink,filelink2,"");
+    }
+    return newRecord;
   }
   
   private void insertData(DocumentClient client, Record r){

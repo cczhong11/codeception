@@ -84,6 +84,11 @@
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <allow-navigation href="http://10.4.179.241:8100" />
     <allow-navigation href="http://10.21.6.90:8100" />
+    <plugin name="cordova-plugin-advanced-http" spec="^1.11.1" />
+    <allow-navigation href="http://169.254.55.44:8100" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
+    </plugin>
     <engine name="browser" spec="5.0.3" />
     <engine name="ios" spec="4.5.4" />
 </widget>

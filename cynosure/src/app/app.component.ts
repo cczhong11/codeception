@@ -60,7 +60,7 @@ export class MyApp {
   uploadPicture() {
     //define cam options
     const options: CameraOptions = {
-      quality: 50, // picture quality
+      quality: 100, // picture quality
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -69,21 +69,21 @@ export class MyApp {
     console.log("Picture Time!");
 
     this.camera.getPicture(options).then((imageData) => {
-      this.base64Image = "data:image/png;base64," + imageData;
+      this.base64Image = "data:image/jpeg;base64," + imageData;
       //this.base64Image = imageData;
-      this.photos.push(this.base64Image);
-      this.photos.reverse();
+      // this.photos.push(this.base64Image);
+      // this.photos.reverse();
       console.log(this.photos);
-      if (this.photos !== null) {
-        var f = new File([this.photos], "filename.png", { type: "image/png" });
+      if (this.base64Image !== null) {
+        var f = new File([this.base64Image], "iphone.jpeg", { type: "image/jpeg" });
         console.log("uploading");
-        const baseUrl = this.blob.generateBlobUrl(this.Config, "filename.png");
+        const baseUrl = this.blob.generateBlobUrl(this.Config, "iphone.jpeg");
         console.log(baseUrl);
-        console.log(this.photos);
+        console.log(this.base64Image);
         this.config = {
           baseUrl: baseUrl,
           sasToken: this.Config.sas,
-          blockSize: 1024 * 64, // OPTIONAL, default value is 1024 * 32
+          blockSize: 1024 * 512, // OPTIONAL, default value is 1024 * 32
           file: f,
           complete: () => {
             console.log('Transfer completed !');

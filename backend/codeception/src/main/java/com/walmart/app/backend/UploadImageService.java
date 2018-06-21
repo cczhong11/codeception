@@ -93,14 +93,15 @@ public class UploadImageService extends HttpServlet {
             data = data.substring(start + 1);
 
             BufferedImage image = ImageIO.read(new ByteArrayInputStream(javax.xml.bind.DatatypeConverter.parseBase64Binary(data)));
-            BufferedImage thumbImg = Scalr.resize(image, Method.QUALITY,
-                    Mode.AUTOMATIC, 80, 80, Scalr.OP_ANTIALIAS);
+            BufferedImage thumbImg = Scalr.resize(image, Method.ULTRA_QUALITY,
+                    Mode.AUTOMATIC, 200, 200);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(thumbImg, "JPEG", baos);
+            ImageIO.write(thumbImg, "PNG", baos);
             byte[] encodeBase64 = Base64.encodeBase64(baos.toByteArray());
 
             String base64Encoded = new String(encodeBase64);
+            base64Encoded = "data:image/jpeg;base64,"+base64Encoded;
             baos.close();
             File sourceFile2 = File.createTempFile("thumbnail", ".jpeg");
             filename2 = sourceFile2.getName();

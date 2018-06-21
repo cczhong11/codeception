@@ -65,7 +65,7 @@ public class UploadService extends HttpServlet {
     String filelink = obj.getString("filelink");
     String[] f = filelink.split("\\+");
     filelink = f[0];
-    String filelink2 = f[1];
+    String filelink2 = "https://cynosure.blob.core.windows.net/cynosure/"+f[1];
     String username = obj.getString("username");
     Record newRecord;
     try{

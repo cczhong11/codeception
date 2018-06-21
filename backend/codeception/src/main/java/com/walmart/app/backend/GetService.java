@@ -2,7 +2,10 @@ package com.walmart.app.backend;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -80,6 +83,7 @@ public class GetService extends HttpServlet {
         JSONObject object = new JSONObject(documentList.get(i).toJson());
         double distance = getDistance((double)r.x,(Double)object.get("x"),r.y,(Double)object.get("y"));
         object.put("distance", distance);
+        object.put("raw",getURL(object.getString("Thunmblink")));
         l.add(object);
       }
       obj.put("data", l);
@@ -100,5 +104,38 @@ public class GetService extends HttpServlet {
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     double distance = R * c * 1000; // convert to meters
     return distance;
+  }
+  private String getURL(String link){
+    try{
+
+        URL obj = new URL(link);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+    
+        // optional default is GET
+        con.setRequestMethod("GET");
+    
+        //add request header
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+    
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'GET' request to URL : " + link);
+        System.out.println("Response Code : " + responseCode);
+    
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+    
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        
+        //print result
+        return response.toString();}
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return "";
   }
 }

@@ -32,6 +32,8 @@ public class MiniSite {
                       .addMapping("/upload"),
                 servlet("UploadImageService", UploadImageService.class)
                       .addMapping("/uploadImage"),
+                servlet("UploadVideoService", UploadVideoService.class)
+                      .addMapping("/uploadVideo"),
                   servlet("GetService", GetService.class).addMapping("/get"),
                   servlet("HealthCheckServlet", HealthCheckServlet.class)
                       .addMapping("/"));

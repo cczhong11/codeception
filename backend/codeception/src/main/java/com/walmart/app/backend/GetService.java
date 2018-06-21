@@ -83,7 +83,11 @@ public class GetService extends HttpServlet {
         JSONObject object = new JSONObject(documentList.get(i).toJson());
         double distance = getDistance((double)r.x,(Double)object.get("x"),r.y,(Double)object.get("y"));
         object.put("distance", distance);
-        object.put("raw",getURL(object.getString("Thunmblink")));
+        if(!object.getString("Thunmblink").equals(""))
+          object.put("raw",getURL(object.getString("Thunmblink")));
+        else{
+          object.put("raw","");
+        }
         l.add(object);
       }
       obj.put("data", l);

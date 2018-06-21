@@ -64,15 +64,24 @@ public class UploadService extends HttpServlet {
     float y = obj.getFloat("y");
     String filelink = obj.getString("filelink");
     String[] f = filelink.split("\\+");
-    filelink = f[0];
-    String filelink2 = "https://cynosure.blob.core.windows.net/cynosure/"+f[1];
-    String username = obj.getString("username");
     Record newRecord;
-    try{
-      String description = obj.getString("description");
-      newRecord = new Record(x,y, username, instant.toString(), filelink,filelink2,description);
-    }catch(Exception e){
-      newRecord=new Record(x,y, username, instant.toString(), filelink,filelink2,"");
+    String username = obj.getString("username");
+    if(f.length==2){
+      filelink = f[0];
+      String filelink2 = "https://cynosure.blob.core.windows.net/cynosure/"+f[1];
+      try{
+        String description = obj.getString("description");
+        newRecord = new Record(x,y, username, instant.toString(), filelink,filelink2,description);
+      }catch(Exception e){
+        newRecord=new Record(x,y, username, instant.toString(), filelink,filelink2,"");
+      }
+    }else{
+      try{
+        String description = obj.getString("description");
+        newRecord = new Record(x,y, username, instant.toString(), filelink,"",description);
+      }catch(Exception e){
+        newRecord=new Record(x,y, username, instant.toString(), filelink,"","");
+      }
     }
     return newRecord;
   }

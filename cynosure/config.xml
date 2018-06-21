@@ -91,5 +91,4 @@
     </plugin>
     <engine name="browser" spec="5.0.3" />
     <engine name="ios" spec="4.5.4" />
-    <plugin name="cordova-plugin-media-capture" spec="~3.0.2" />
 </widget>

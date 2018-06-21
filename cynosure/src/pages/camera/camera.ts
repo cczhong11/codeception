@@ -107,7 +107,7 @@ export class CameraPage {
 
     let options: CaptureVideoOptions = { limit: 1, duration: 10 };
 
-    this.mediaCapture.captureImage(options)
+    this.mediaCapture.captureVideo(options)
       .then((VideoData: MediaFile[]) => {
         console.log(VideoData)
         if (VideoData !== null) {

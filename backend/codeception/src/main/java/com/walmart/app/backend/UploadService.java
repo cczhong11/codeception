@@ -63,7 +63,9 @@ public class UploadService extends HttpServlet {
     float x = obj.getFloat("x");
     float y = obj.getFloat("y");
     String filelink = obj.getString("filelink");
-    String filelink2 = obj.getString("tfilelink");
+    String[] f = filelink.split("+");
+    filelink = f[0];
+    String filelink2 = f[1];
     String username = obj.getString("username");
     Record newRecord;
     try{

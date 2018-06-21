@@ -46,7 +46,8 @@ export class CameraPage {
       // this.photos.reverse();
       if (this.base64Image !== null) {
         //http post update here
-        var link = 'https://codeception.azurewebsites.net/uploadImage';
+        //var link = 'https://codeception.azurewebsites.net/uploadImage';
+        var link = 'http://127.0.0.1:3000/uploadImage';
         let payload = this.base64Image;
         
         let headers = { 'Content-Type': 'text' };
@@ -75,7 +76,8 @@ export class CameraPage {
               let uploadHeader = { 'Content-Type': 'text' };
               this.http.setDataSerializer('json');
 
-              this.http.post('https://codeception.azurewebsites.net/upload', uploadPayload, uploadHeader)
+              //this.http.post('https://codeception.azurewebsites.net/upload', uploadPayload, uploadHeader)
+              this.http.post('http://127.0.0.1:3000/upload', uploadPayload, uploadHeader)
                 .then(data => {
                   console.log("Uploaded to CosmosDB");
                 })

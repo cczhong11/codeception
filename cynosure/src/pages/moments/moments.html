@@ -12,14 +12,21 @@
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
-    <ion-list id="moments-list2">
-        <ion-item color="none" id="moments-list-item14" *ngFor="let key of arrayofkeys">
-            <ion-thumbnail item-left>
-                <img src="{{key.raw}}">
-            </ion-thumbnail>
-            <h2>
-                {{key.filelink}}
-            </h2>
-        </ion-item>
-    </ion-list>
+    <div class="list card" *ngIf="arrayofkeys.length > 0">
+        <ion-list id="moments-list2">
+            <ion-item color="none" id="moments-list-item14" *ngFor="let key of arrayofkeys">
+                <ion-thumbnail item-left>
+                    <img src="{{key.raw}}">
+                </ion-thumbnail>
+                <h2>
+                    {{key.filelink}}
+                </h2>
+            </ion-item>
+        </ion-list>
+    </div>
+    <div class="card" *ngIf="!arrayofkeys.length">
+        <div class="item item-text-wrap" style="text-align:center">
+            No Available Moments
+        </div>
+    </div>
 </ion-content>

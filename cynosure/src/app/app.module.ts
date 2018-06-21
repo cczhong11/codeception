@@ -14,6 +14,7 @@ import { BlobModule } from 'angular-azure-blob-service';
 import { HttpModule } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { MediaCapture } from '@ionic-native/media-capture';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -53,6 +54,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Camera,
     Geolocation,
     HTTP,
+    MediaCapture,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

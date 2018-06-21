@@ -13,52 +13,12 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-list id="moments-list2">
-        <ion-item color="none" id="moments-list-item14">
+        <ion-item color="none" id="moments-list-item14" *ngFor="let key of arrayofkeys">
             <ion-thumbnail item-left>
-                <img />
+                <img src="{{key.raw}}">
             </ion-thumbnail>
             <h2>
-                Item
-            </h2>
-        </ion-item>
-        <ion-item color="none" id="moments-list-item15">
-            <ion-thumbnail item-left>
-                <img />
-            </ion-thumbnail>
-            <h2>
-                Item
-            </h2>
-        </ion-item>
-        <ion-item color="none" id="moments-list-item16">
-            <ion-thumbnail item-left>
-                <img />
-            </ion-thumbnail>
-            <h2>
-                Item
-            </h2>
-        </ion-item>
-        <ion-item color="none" id="moments-list-item17">
-            <ion-thumbnail item-left>
-                <img />
-            </ion-thumbnail>
-            <h2>
-                Item
-            </h2>
-        </ion-item>
-        <ion-item color="none" id="moments-list-item18">
-            <ion-thumbnail item-left>
-                <img />
-            </ion-thumbnail>
-            <h2>
-                Item
-            </h2>
-        </ion-item>
-        <ion-item color="none" id="moments-list-item19">
-            <ion-thumbnail item-left>
-                <img />
-            </ion-thumbnail>
-            <h2>
-                Item
+                {{key.filelink}}
             </h2>
         </ion-item>
     </ion-list>

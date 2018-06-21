@@ -16,6 +16,7 @@ export class MapsPage {
   data: any={};
   arrayofkeys:any=[];
   arrayofpos:any=[];
+  pic:any=[];
   constructor(public navCtrl: NavController, public geolocation: Geolocation,private http: HTTP) {
  
   }
@@ -33,7 +34,7 @@ export class MapsPage {
       
       let mapOptions = {
         center: latLng,
-        zoom: 1,
+        zoom: 10,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       }
  
@@ -53,9 +54,13 @@ export class MapsPage {
         .then(data => {
           this.data = JSON.parse(data.data);
           var i: number = 0;
+          this.arrayofkeys=[];
+          this.arrayofpos=[];
+          this.pic=[]
           for (i; i < Object.keys(this.data.data).length; i++) {
             console.log(this.data.data[i]);
             this.arrayofkeys.push(this.data.data[i].time);
+            this.pic.push(this.data.data[i].raw);
             let latLng = new google.maps.LatLng(this.data.data[i]["y"], this.data.data[i]["x"]);
             this.arrayofpos.push(latLng);
           }
@@ -64,10 +69,13 @@ export class MapsPage {
           console.log(this.arrayofkeys);
        
           var markers = this.arrayofpos.map(function(location, i) {
-            return new google.maps.Marker({
+            var m = new google.maps.Marker({
               position: location,
               label: this.arrayofkeys[i]
             });
+            let content = "<img src="+this.pic[i]+">";   
+            this.addInfoWindow(m,content);
+            return m;
           },this);
           var markerCluster = new MarkerClusterer(this.map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
@@ -80,5 +88,15 @@ export class MapsPage {
 
 
 }
-
+addInfoWindow(marker, content){
+ 
+  let infoWindow = new google.maps.InfoWindow({
+    content: content
+  });
+ 
+  google.maps.event.addListener(marker, 'click', () => {
+    infoWindow.open(this.map, marker);
+  });
+ 
+}
 }

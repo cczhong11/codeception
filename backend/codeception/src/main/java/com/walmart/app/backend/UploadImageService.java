@@ -87,15 +87,20 @@ public class UploadImageService extends HttpServlet {
             Writer output = new BufferedWriter(new FileWriter(sourceFile));
             output.write(data);
             output.close();
-            BufferedImage image = ImageIO.read(new ByteArrayInputStream(data.getBytes()));
+
+
+            int start = data.indexOf(",");
+            data = data.substring(start + 1);
+
+            BufferedImage image = ImageIO.read(new ByteArrayInputStream(javax.xml.bind.DatatypeConverter.parseBase64Binary(data)));
             BufferedImage thumbImg = Scalr.resize(image, Method.QUALITY,
-                    Mode.AUTOMATIC, 240, 320, Scalr.OP_ANTIALIAS);
+                    Mode.AUTOMATIC, 80, 80, Scalr.OP_ANTIALIAS);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(thumbImg, "JPEG", baos);
             byte[] encodeBase64 = Base64.encodeBase64(baos.toByteArray());
 
-             String base64Encoded = new String(encodeBase64);
+            String base64Encoded = new String(encodeBase64);
             baos.close();
             File sourceFile2 = File.createTempFile("thumbnail", ".jpeg");
             filename2 = sourceFile2.getName();
@@ -104,16 +109,18 @@ public class UploadImageService extends HttpServlet {
             output2.close();
             // Getting a blob reference
             CloudBlockBlob blob = container.getBlockBlobReference(sourceFile.getName());
-
-            // Creating blob and uploading file to it
-            System.out.println("Uploading the sample file ");
             blob.uploadFromFile(sourceFile.getAbsolutePath());
-            blob.uploadFromFile(sourceFile2.getAbsolutePath());
+            
+            CloudBlockBlob blob2 = container.getBlockBlobReference(sourceFile2.getName());
+            
+            blob2.uploadFromFile(sourceFile2.getAbsolutePath());
+            System.out.println("Uploading the sample file ");
 
         } catch (Exception e) {
             e.printStackTrace();
             return "null";
         }
+        System.out.println(filename+"+"+filename2);
         return filename+"+"+filename2;
     }
 

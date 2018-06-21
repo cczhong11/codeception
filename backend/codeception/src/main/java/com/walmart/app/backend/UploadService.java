@@ -63,7 +63,7 @@ public class UploadService extends HttpServlet {
     float x = obj.getFloat("x");
     float y = obj.getFloat("y");
     String filelink = obj.getString("filelink");
-    String[] f = filelink.split("+");
+    String[] f = filelink.split("\\+");
     filelink = f[0];
     String filelink2 = f[1];
     String username = obj.getString("username");
@@ -86,6 +86,7 @@ public class UploadService extends HttpServlet {
           documentDefinition.set("y", r.y);
           documentDefinition.set("time",r.time);
           documentDefinition.set("filelink",r.filelink);
+          documentDefinition.set("Thunmblink",r.Thumbfilelink);
           
           try{
               client.createDocument(collectionLink, documentDefinition, null, true);

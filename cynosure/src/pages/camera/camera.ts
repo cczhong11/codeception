@@ -6,6 +6,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions } from '@ionic-native/media-capture';
+import { Transfer, TransferObject, FileUploadOptions } from '@ionic-native/transfer';
+import { FileChooser } from '@ionic-native/file-chooser';
 
 @Component({
   selector: 'page-camera',
@@ -15,6 +17,7 @@ import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions } from '@ion
 export class CameraPage {
   data: any = {};
   image: any = {};
+  videoID: any;
 
   constructor(public navCtrl: NavController,
     public events: Events,
@@ -22,6 +25,8 @@ export class CameraPage {
     private camera: Camera,
     private geolocation: Geolocation,
     private statusBar: StatusBar,
+    public fileChooser: FileChooser,
+    private transfer: Transfer,
     private mediaCapture: MediaCapture) {
   }
 
@@ -111,10 +116,36 @@ export class CameraPage {
       .then((VideoData: MediaFile[]) => {
         console.log(VideoData)
         if (VideoData !== null) {
+
+          var i, path, len;
+          for (i = 0, len = VideoData.length; i < len; i += 1) {
+            path = VideoData[i].fullPath;
+          }
           //http post update here
+
+          this.videoID = path;
           this.statusBar.overlaysWebView(true);
           var link = 'https://codeception.azurewebsites.net/uploadVideo';
           let payload = VideoData;
+
+          const fileTransfer: TransferObject = this.transfer.create();
+
+          let options1: FileUploadOptions = {
+            fileKey: 'video_upload_file',
+            fileName: this.videoID,
+            headers: {},
+            mimeType: "multipart/form-data",
+            params: { },
+            chunkedMode: false
+          }
+
+          fileTransfer.upload(this.videoID, link, options1)
+            .then((data) => {
+              console.log("Upload success!");
+              console.log(data);
+          }, (err) => {
+            console.log("Video Upload Error");
+          });
           
           let headers = { 'Content-Type': 'text' };
           this.http.setDataSerializer('utf8');

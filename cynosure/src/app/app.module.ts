@@ -15,6 +15,8 @@ import { HttpModule } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MediaCapture } from '@ionic-native/media-capture';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer } from '@ionic-native/transfer';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -55,6 +57,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Geolocation,
     HTTP,
     MediaCapture,
+    FileChooser,
+    Transfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -143,15 +143,8 @@ export class CameraPage {
             .then((data) => {
               console.log("Upload success!");
               console.log(data);
-          }, (err) => {
-            console.log("Video Upload Error");
-          });
-          
-          let headers = { 'Content-Type': 'text' };
-          this.http.setDataSerializer('utf8');
-  
-          this.http.post(link, payload, headers)
-            .then(data => {
+              let headers = { 'Content-Type': 'text' };
+              this.http.setDataSerializer('utf8');
               let lat = 80;
               let lng = 80;
               console.log("Success!");
@@ -165,7 +158,7 @@ export class CameraPage {
                   x: lng,
                   y: lat,
                   username: "mmds",
-                  filelink: 'https://cynosure.blob.core.windows.net/cynosure/' + data.data
+                  filelink: 'https://cynosure.blob.core.windows.net/cynosure/' + data.response
                 }
   
                 console.log(uploadPayload);

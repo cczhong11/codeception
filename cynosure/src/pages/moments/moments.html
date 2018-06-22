@@ -18,8 +18,12 @@
                 <img src="{{key.raw}}">
             </ion-thumbnail>
             <h2>
-                {{key.filelink}}
+                {{key.time}}
             </h2>
+            <button danger (click)="showmore(key)">
+                <ion-icon name="show"></ion-icon>
+                show
+            </button>
         </ion-item>
     </ion-list>
 </ion-content>

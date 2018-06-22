@@ -9,6 +9,7 @@ import {
   EmbeddedViewRef,
   ApplicationRef
 } from '@angular/core';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-moments',
@@ -21,7 +22,8 @@ export class MomentsPage {
     private geolocation: Geolocation,
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
-    private injector: Injector) {
+    private injector: Injector,
+    private alertCtrl: AlertController) {
   }
 
   data: any = {};
@@ -29,7 +31,23 @@ export class MomentsPage {
 
   ngOnInit() {
   }
-
+  showmore(key){
+    this.http.get(key.filelink, "", "")
+        .then(data => {
+            let alert; 
+            if(key.filelink.includes('jpeg')){
+                alert = this.alertCtrl.create({
+                    title: 'Detail',
+                    subTitle: '<img src='+data.data+'>',
+                    buttons: ['Ok']
+                  });
+            }else{
+                
+            }
+            
+              alert.present();
+        });
+  }
   doRefresh(refresher) {
     let lat = 80;
     let lng = 80;

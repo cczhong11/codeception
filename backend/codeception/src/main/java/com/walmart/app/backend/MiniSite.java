@@ -7,6 +7,7 @@ import io.undertow.server.handlers.PathHandler;
 import io.undertow.servlet.api.DeploymentInfo;
 import io.undertow.servlet.api.DeploymentManager;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletException;
 
 import static io.undertow.servlet.Servlets.defaultContainer;
@@ -22,6 +23,7 @@ public class MiniSite {
 
   public static void main(String[] args) throws Exception {
     try {
+        
       DeploymentInfo servletBuilder =
           deployment()
               .setClassLoader(MiniSite.class.getClassLoader())

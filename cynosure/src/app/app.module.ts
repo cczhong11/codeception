@@ -17,6 +17,9 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { MediaCapture } from '@ionic-native/media-capture';
 import { FileChooser } from '@ionic-native/file-chooser';
 import { Transfer } from '@ionic-native/transfer';
+import { StreamingMedia } from '@ionic-native/streaming-media';
+import { FileOpener } from '@ionic-native/file-opener';
+import { File } from '@ionic-native/file';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -57,8 +60,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Geolocation,
     HTTP,
     MediaCapture,
+    StreamingMedia,
     FileChooser,
+    FileOpener,
     Transfer,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

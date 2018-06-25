@@ -8,6 +8,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions } from '@ionic-native/media-capture';
 import { Transfer, TransferObject, FileUploadOptions } from '@ionic-native/transfer';
 import { FileChooser } from '@ionic-native/file-chooser';
+import { FileOpener } from '@ionic-native/file-opener';
+import { File } from '@ionic-native/file';
 
 @Component({
   selector: 'page-camera',
@@ -18,6 +20,7 @@ export class CameraPage {
   data: any = {};
   image: any = {};
   videoID: any;
+  fileData: any;
 
   constructor(public navCtrl: NavController,
     public events: Events,
@@ -27,7 +30,9 @@ export class CameraPage {
     private statusBar: StatusBar,
     public fileChooser: FileChooser,
     private transfer: Transfer,
-    private mediaCapture: MediaCapture) {
+    private mediaCapture: MediaCapture,
+    private fileOpener: FileOpener,
+    private file: File) {
   }
 
   public photos: any;
@@ -40,7 +45,7 @@ export class CameraPage {
   goToPicture(params) {
     //define cam options
     const options: CameraOptions = {
-      quality: 100, // picture quality
+      quality: 50, // picture quality
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -116,71 +121,77 @@ export class CameraPage {
       .then((VideoData: MediaFile[]) => {
         console.log(VideoData)
         if (VideoData !== null) {
-
-          var i, path, len;
+          var i, path, len, fname;
           for (i = 0, len = VideoData.length; i < len; i += 1) {
             path = VideoData[i].fullPath;
+            fname = VideoData[i].name;
           }
-          //http post update here
+
+          console.log(path);
 
           this.videoID = path;
           this.statusBar.overlaysWebView(true);
           var link = 'https://codeception.azurewebsites.net/uploadVideo';
           let payload = VideoData;
+          console.log("THIS IS THE UPLOADED VIDEO DATA");
+          console.log(VideoData);
 
-          const fileTransfer: TransferObject = this.transfer.create();
+          console.log(fname);
+          console.log(this.file.tempDirectory);
 
-          let options1: FileUploadOptions = {
-            fileKey: 'video_upload_file',
-            fileName: this.videoID,
-            headers: {},
-            mimeType: "multipart/form-data",
-            params: { },
-            chunkedMode: false
-          }
-
-          fileTransfer.upload(this.videoID, link, options1)
-            .then((data) => {
-              console.log("Upload success!");
-              console.log(data);
-              let headers = { 'Content-Type': 'text' };
-              this.http.setDataSerializer('utf8');
-              let lat = 80;
-              let lng = 80;
-              console.log("Success!");
-              console.log(data);
-              this.geolocation.getCurrentPosition().then((resp) => {
-                lat = resp.coords.latitude;
-                lng = resp.coords.longitude;
-                console.log(lat, lng);
-  
-                let uploadPayload = {
-                  x: lng,
-                  y: lat,
-                  username: "mmds",
-                  filelink: 'https://cynosure.blob.core.windows.net/cynosure/' + data.response
-                }
-  
-                console.log(uploadPayload);
-  
-                let uploadHeader = { 'Content-Type': 'text' };
-                this.http.setDataSerializer('json');
-  
-                this.http.post('https://codeception.azurewebsites.net/upload', uploadPayload, uploadHeader)
-                  .then(data => {
-                    console.log("Uploaded to CosmosDB");
-                  })
-                  .catch(error => {
-                    console.log("Oooooooooooops!");
-                  });
-                //Call to your logic HERE
-              }).catch((error) => {
-                alert(error);
-                });
+          this.http.uploadFile(link, {}, { 'Content-Type': 'video/quicktime' }, "file://" + path, this.videoID)
+            .then((fileData) => {
+              console.log('File uploaded');
+              console.log(fileData.data);
+              // console.log(String.fromCharCode.apply(null, new Uint16Array(this.fileData)));
+              // let vidHeader = { 'Content-Type': 'video/quicktime' };
+              // this.http.post(link, this.fileData, vidHeader)
+              // .then((data) => {
+              //   console.log("Upload success!");
+              //   console.log(data);
+              //   let headers = { 'Content-Type': 'text' };
+              //   this.http.setDataSerializer('utf8');
+              //   let lat = 80;
+              //   let lng = 80;
+              //   console.log("Success!");
+              //   console.log(data);
+              //   this.geolocation.getCurrentPosition().then((resp) => {
+              //     lat = resp.coords.latitude;
+              //     lng = resp.coords.longitude;
+              //     console.log(lat, lng);
+    
+              //     let uploadPayload = {
+              //       x: lng,
+              //       y: lat,
+              //       username: "mmds",
+              //       filelink: 'https://cynosure.blob.core.windows.net/cynosure/' + data.data
+              //     }
+    
+              //     console.log(uploadPayload);
+    
+              //     let uploadHeader = { 'Content-Type': 'text' };
+              //     this.http.setDataSerializer('json');
+    
+              //     this.http.post('https://codeception.azurewebsites.net/upload', uploadPayload, uploadHeader)
+              //       .then(data => {
+              //         console.log("Uploaded to CosmosDB");
+              //       })
+              //       .catch(error => {
+              //         console.log("Oooooooooooops!");
+              //       });
+              //     //Call to your logic HERE
+              //   }).catch((error) => {
+              //     alert(error);
+              //     });
+              // })
+              // .catch( error => {
+              //   console.log(error);
+              //   console.log("Oooops!");
+              // });
             })
-            .catch( error => {
-              console.log("Oooops!");
-            });
+            .catch(e => console.log('Error opening file', e));
+
+          //http post update here
         }
       },
     (err: CaptureError) => console.error(err)

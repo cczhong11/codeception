@@ -20,6 +20,7 @@ import { Transfer } from '@ionic-native/transfer';
 import { StreamingMedia } from '@ionic-native/streaming-media';
 import { FileOpener } from '@ionic-native/file-opener';
 import { File } from '@ionic-native/file';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -34,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsControllerPage,
     CameraPage,
     SignupPage,
-    LoginPage
+    LoginPage,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

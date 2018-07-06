@@ -37,6 +37,7 @@
         "angular-azure-blob-service": "^1.0.0",
         "azure-storage": "^2.9.0-preview",
         "com.hutchind.cordova.plugins.streamingmedia": "~0.1.4",
+        "cordova-android": "7.0.0",
         "cordova-browser": "5.0.3",
         "cordova-ios": "4.5.4",
         "cordova-plugin-advanced-http": "^1.11.1",
@@ -58,7 +59,8 @@
         "ionicons": "3.0.0",
         "rxjs": "5.5.11",
         "sw-toolbox": "3.6.0",
-        "zone.js": "0.8.26"
+        "zone.js": "0.8.26",
+        "com.moust.cordova.videoplayer": "https://github.com/moust/cordova-plugin-videoplayer.git"
     },
     "devDependencies": {
         "@ionic/app-scripts": "^3.1.10",
@@ -88,7 +90,8 @@
         },
         "platforms": [
             "browser",
-            "ios"
+            "ios",
+            "android"
         ]
     }
 }

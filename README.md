@@ -1,37 +1,58 @@
-# codeception
+# Cynosure
 
-An app help you know other associates photo based on GPS. 
+An Location-based Social Media, only allow user see details of photos when they are close to the place taken that photo. Idea is Facebook Plus Pokemon Go.
 
-## API
+Our Project won Walmart Codeception Third Prize in Bentonville.
 
-1. /upload
-{x:xx,y:yy,user:name,file:filelink, tfilelink,**time:time**}
+## System Graph
 
-2. /get
-{data:[{x:xx,y:yy,file:filelink,**time:time**},{x:xx,y:yy,file:filelink,**time:time**}....]}
-3. uploadImage
+![](pic/component.png)
+
+The whole system is hosted on Azure. The backend is running on WebApp and we used CosmosDB as Database to save metadata. Blob storage is used to save picture and video raw data.
+
 
 ## Backend 
 
-- using undertow and CosmosDB to deploy backend service
-- install maven and use 'mvn package' to compile code 
-- run 'sudo java -cp target/backend.jar com.walmart.app.backend.MiniSite' to start server
+In the BackEnd, I used Undertow as Java Server to serve FrontEnd request. When user upload a picture with GPS, Backend will do the following things:
+
+1. Receive Picture Raw Data, using Java Package to create a ThumberNail file for this image
+2. Upload Raw Picture file and Thumbnail to Blob Storage
+3. Return URL for both file to FrontEnd
+4. FrontEnd post data with time, location and url to Backend
+5. BackEnd will save these information as one record in CosmosDB.
+
+### Run
 
 
-### upload
+1. Install maven and use 'mvn package' to compile code 
+2. Run 'sudo java -cp target/backend.jar com.walmart.app.backend.MiniSite' to start server
 
-- get post data
-- connect cosmosDB using java sdk
-- insert data
 
-### get
+### FrontEnd
 
-- get post data
-- connect cosmosDB and execute SQL to get data within 50m
-- return json to user
+The FrontEnd is written with TypeScript in `Ionic`. If you want to run the code, following these instructions.
 
-## Frontend
+```bash
+sudo npm install -g ionic cordova
+ionic cordova platform add browser --save
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security --user-data-dir="/tmp"
+ionic cordova run browser
 
-- upload data to blob first
-- upload file link to backend
-- get data and download data from blob
+```
+
+Please remember to change Google Map API Key in `cynosure/src/index.html`
+
+The frontend will do the following things.
+
+1. Call System camera to take a photo or video.
+2. Upload picture to backend.
+3. Get user location via GPS.
+4. Send information to Backend
+5. Retrieve only picture with 50 meters nearby.
+6. Show photo and mark them on Google Map.
+
+Some screenshots for our system:
+
+![](pic/1.png)
+![](pic/2.png)
+![](pic/3.png)

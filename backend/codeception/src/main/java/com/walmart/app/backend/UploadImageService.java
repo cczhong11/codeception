@@ -82,6 +82,7 @@ public class UploadImageService extends HttpServlet {
         String sha256hex = DigestUtils.sha256Hex(data);
         String filename,filename2;
         try {
+            // Raw file 
             File sourceFile = File.createTempFile(sha256hex, ".jpeg");
             filename = sourceFile.getName();
             Writer output = new BufferedWriter(new FileWriter(sourceFile));
@@ -103,6 +104,8 @@ public class UploadImageService extends HttpServlet {
             String base64Encoded = new String(encodeBase64);
             base64Encoded = "data:image/jpeg;base64,"+base64Encoded;
             baos.close();
+
+            // thumbnail file
             File sourceFile2 = File.createTempFile("thumbnail", ".jpeg");
             filename2 = sourceFile2.getName();
             Writer output2 = new BufferedWriter(new FileWriter(sourceFile2));

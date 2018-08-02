@@ -18,16 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.microsoft.azure.documentdb.Database;
+
 import com.microsoft.azure.documentdb.Document;
 import com.microsoft.azure.documentdb.DocumentClient;
-import com.microsoft.azure.documentdb.DocumentClientException;
-import com.microsoft.azure.documentdb.DocumentCollection;
 import com.microsoft.azure.documentdb.RequestOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.xnio.IoUtils;
+
 
 public class GetService extends HttpServlet {
 
@@ -134,8 +132,7 @@ public class GetService extends HttpServlet {
             response.append(inputLine);
         }
         in.close();
-        
-        //print result
+
         return response.toString();}
         catch(Exception e){
             e.printStackTrace();

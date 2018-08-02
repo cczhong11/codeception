@@ -24,8 +24,8 @@ In the BackEnd, I used Undertow as Java Server to serve FrontEnd request. When u
 ### Run
 
 
-1. Install maven and use 'mvn package' to compile code 
-2. Run 'sudo java -cp target/backend.jar com.walmart.app.backend.MiniSite' to start server
+1. Install maven and use `mvn package` to compile code 
+2. Run `sudo java -cp target/backend.jar com.walmart.app.backend.MiniSite` to start server
 
 
 ### FrontEnd

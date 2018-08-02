@@ -53,6 +53,6 @@ The frontend will do the following things.
 
 Some screenshots for our system:
 
-![](pic/1.png)
-![](pic/2.png)
-![](pic/3.png)
+![](pic/1.PNG)
+![](pic/2.PNG)
+![](pic/3.PNG)

@@ -69,8 +69,8 @@ public class UploadVideoService extends HttpServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response)
             throws ServletException, IOException {
 
-        //String filelink = retrievePostData(request.getReader());
-        String filelink = retrievePostData2(request);
+        String filelink = retrievePostData(request.getReader());
+        //String filelink = retrievePostData2(request);
 
         PrintWriter writer = response.getWriter();
         //System.out.println(filelink);
@@ -95,6 +95,7 @@ public class UploadVideoService extends HttpServlet {
             output.write(data);
             output.close();
             CloudBlockBlob blob = container.getBlockBlobReference(sourceFile.getName());
+            blob.getProperties().setContentType("video/quicktime");
             blob.uploadFromFile(sourceFile.getAbsolutePath());
 
         } catch (Exception e) {

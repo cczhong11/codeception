@@ -14,6 +14,13 @@ import { BlobModule } from 'angular-azure-blob-service';
 import { HttpModule } from '@angular/http';
 import { HTTP } from '@ionic-native/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { MediaCapture } from '@ionic-native/media-capture';
+import { FileChooser } from '@ionic-native/file-chooser';
+import { Transfer } from '@ionic-native/transfer';
+import { StreamingMedia } from '@ionic-native/streaming-media';
+import { FileOpener } from '@ionic-native/file-opener';
+import { File } from '@ionic-native/file';
+import { ProgressBarComponent } from '../components/progress-bar/progress-bar';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -28,7 +35,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     TabsControllerPage,
     CameraPage,
     SignupPage,
-    LoginPage
+    LoginPage,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +61,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Camera,
     Geolocation,
     HTTP,
+    MediaCapture,
+    StreamingMedia,
+    FileChooser,
+    FileOpener,
+    Transfer,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

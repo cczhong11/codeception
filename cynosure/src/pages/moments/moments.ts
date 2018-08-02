@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HTTP } from '@ionic-native/http';
 import { Geolocation } from '@ionic-native/geolocation';
+import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
+
 import {
   Injectable,
   Injector,
@@ -23,7 +25,8 @@ export class MomentsPage {
     private componentFactoryResolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
     private injector: Injector,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private streamingMedia: StreamingMedia) {
   }
 
   data: any = {};
@@ -42,13 +45,32 @@ export class MomentsPage {
                     buttons: ['Ok']
                   });
             }else{
-                
+              console.log("FULL DATA");
+              console.log(data);
+              console.log("DATA.DATA");
+              console.log(data.data);
+              console.log("DATA PROPERTIES");
+              console.log(Object.getOwnPropertyNames(data));
+              let options: StreamingVideoOptions = {
+                successCallback: () => { console.log('Video played') },
+                errorCallback: (e) => { console.log('Error streaming') },
+                orientation: 'landscape'
+              };
+              let tempLink = key.filelink.replace('https', 'http');
+              this.streamingMedia.playVideo(tempLink, options);
+              let alertz; 
+              alertz = this.alertCtrl.create({
+                title: 'Detail',
+                subTitle: '<img src='+data.data+'>',
+                buttons: ['Ok']
+              });
             }
-            
               alert.present();
         });
   }
   doRefresh(refresher) {
+
+    this.arrayofkeys = [];
     let lat = 80;
     let lng = 80;
     console.log('Begin async operation', refresher);
